@@ -1,0 +1,11 @@
+<?php
+$server = '127.0.0.1';
+$username = 'admin';
+$password = 'root';
+$database = 'to_do_website';
+
+try{
+	$conn = new PDO("mysql:host=$server;dbname=$database;", $username, $password);
+} catch(PDOException $e){
+	die( "Connection failed: " . $e->getMessage());
+}

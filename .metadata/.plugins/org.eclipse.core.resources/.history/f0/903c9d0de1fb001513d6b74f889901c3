@@ -1,0 +1,60 @@
+<?php
+
+session_start();
+
+require 'php/database.php';
+
+if( isset($_SESSION['user_id']) ){
+
+	$records = $conn->prepare('SELECT id,email,password FROM users WHERE id = :id');
+	$records->bindParam(':id', $_SESSION['user_id']);
+	$records->execute();
+	$results = $records->fetch(PDO::FETCH_ASSOC);
+
+	$user = NULL;
+
+	if( count($results) > 0){
+		$user = $results;
+	}
+
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Velkommen</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id = "container">
+
+	<div class="header">
+		<a href="index.php">Jimmis fest</a>
+	</div>
+
+	<?php if( !empty($user) ): ?>
+
+		<br />Velkommen <?= $user['email']; ?> 
+		<br /><br />Du er logget ind!
+		<br /><br />
+		<a href="php/front.php">Til forsiden?</a>
+		<a href="php/logout.php">Log ud?</a>
+
+	<?php else: ?>
+
+		<h1>Venligst Log ind eller Register</h1>
+		<a href="login.php">Log ind</a> eller
+		<a href="php/register.php">Register</a>
+
+	<?php endif; ?>
+</div>
+
+</body>
+</html>
