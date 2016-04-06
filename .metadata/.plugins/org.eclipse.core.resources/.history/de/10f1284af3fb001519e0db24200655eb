@@ -12,6 +12,8 @@ $message = '';
 
 if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])):
 
+//if form has been submitted
+if (!empty($_POST['email']))
 {
 
 	$email = mysql_real_escape_string($_POST['email']);
@@ -38,9 +40,8 @@ if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'
 	endif;
 		}
 	}
-}
-endif;
 
+	
 
 
 
