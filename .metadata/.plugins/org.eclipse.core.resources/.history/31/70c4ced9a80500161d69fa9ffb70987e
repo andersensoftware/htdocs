@@ -1,0 +1,33 @@
+<?php
+
+$server = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'to_do_website';
+
+// Create connection
+$conn = new mysqli($server, $username, $password, $database);
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+   $emailform = 'joa@jimmiandersen.dk';
+   $sql = "SELECT `email` FROM `autorised` WHERE `email` =". $emailform;
+   $retval = mysql_query( $sql, $conn );
+   
+   if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+   
+   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "EMP ID :{$row['email']}  <br> ".
+           "--------------------------------<br>";
+   }
+   
+   echo "Fetched data successfully\n";
+   
+   mysql_close($conn);
+
+
+
+?>
+

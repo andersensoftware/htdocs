@@ -14,8 +14,8 @@ if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'
 
 {
 
-	$email = mysql_real_escape_string($_POST['email']);
-	$results = mysql_query("select id from autorised where user_email='$email' ");
+	//$email = mysql_real_escape_string($_POST['email']);
+	$results = mysql_query("select id from autorised where email=:email ");
 	$row = mysql_num_rows($results);
 	if ($row == 0 ) {
 		//if $row is greater than 0, (means the email exists)

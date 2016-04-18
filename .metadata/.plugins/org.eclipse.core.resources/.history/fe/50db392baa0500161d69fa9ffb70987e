@@ -1,0 +1,24 @@
+<?php
+
+$server = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'to_do_website';
+
+// Create connection
+$conn = new mysqli($server, $username, $password, $database);
+   if(! $conn ) {
+      die('Could not connect: ' . mysql_error());
+   }
+   $emailform = "joa@jimmiandersen.dk";
+   $sql = "SELECT `email` FROM `autorised` WHERE `email` = ". $emailform;
+   $retval = mysql_query( $sql, $conn );
+   
+  	echo $retval;
+   
+   mysql_close($conn);
+
+
+
+?>
+

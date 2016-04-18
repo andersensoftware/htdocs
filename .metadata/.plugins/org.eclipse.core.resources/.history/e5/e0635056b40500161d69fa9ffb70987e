@@ -1,0 +1,5 @@
+<?php
+$email1 = "jimmi";
+$email2 = "jimmi1";
+echo strcmp($email1, $email2);
+?>
