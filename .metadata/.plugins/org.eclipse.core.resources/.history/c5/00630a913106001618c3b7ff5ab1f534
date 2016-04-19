@@ -1,0 +1,23 @@
+<?php
+session_start();
+
+if( isset($_SESSION['user_id']) ){
+	header("Location: /");
+}
+
+require 'database.php';
+
+	$sql = "INSERT INTO reg_users(f_name, l_name, email, username, password) VALUES (:f_name, :l_name, :email, :username, :password)";
+	$stmt = $conn->prepare($sql);
+	
+	$stmt->bindParam(':f_name', $_POST['f_name']);
+	$stmt->bindParam(':l_name', $_POST['l_name']);
+	$stmt->bindParam(':email', $_POST['email']);
+	$stmt->bindParam(':username', $_POST['user']);
+	$stmt->bindParam(':password', password_hash($_POST['password1'], PASSWORD_BCRYPT));
+	
+	if( $stmt->execute() ):
+	echo "success";
+	endif;
+
+?>

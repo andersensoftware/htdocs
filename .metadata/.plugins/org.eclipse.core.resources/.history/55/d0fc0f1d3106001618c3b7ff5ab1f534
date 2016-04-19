@@ -1,0 +1,64 @@
+<?php
+
+session_start();
+
+if( isset($_SESSION['user_id']) ){
+	header("Location: /");
+}
+
+require 'database.php';
+
+
+if(!empty($_POST['email']) && !empty($_POST['password'])):
+	
+	$records = $conn->prepare('SELECT id, email FROM auth_users WHERE email = :email ');
+	$records->bindParam(':email', $_POST['email']);
+	$records->execute();
+	$results = $records->fetch(PDO::FETCH_ASSOC);
+
+	$message = '';
+
+	if(count($results) > 0){
+		header("Location: register.php");	
+	
+	} else {
+		$message = 'Sorry, those credentials do not match';
+	}
+
+endif;
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Check Credentials</title>
+	
+</head>
+<body>
+<div id = "container">
+	<div class="header">
+		
+	</div>
+
+	<?php if(!empty($message)): ?>
+		<p><?= $message ?></p>
+	<?php endif; ?>
+
+	<h1>Check you Credentials</h1>
+	<h3>Registration is only allowed if validated</h3>
+
+	<form action="validate.php" method="POST">
+		
+		<input type="text" placeholder="E-mail" name="email">
+		
+		<input type="submit" value="login">
+
+	</form>
+</div>
+</body>
+</html>

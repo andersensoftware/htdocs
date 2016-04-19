@@ -1,0 +1,51 @@
+<?php
+$server = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'testDB';
+
+if(!empty($_POST['username']) && !empty($_POST['password'])):
+
+	
+
+
+$con2 = mysqli_connect($server,$username,$password) or die(mysqli_error($con2)); //connect to server
+mysqli_select_db($con2, $database) or die(mysqli_error($con2));
+
+
+
+$records = $con2->prepare('select f_name, l_name from auth_users where username = :u_name AND password = password(:password)');
+	$records->bindParam(':u_name', $_POST['username']);
+	$records->bindParam(':password', $_POST['password']);
+	$records->execute();
+	$results = $records->fetch(PDO::FETCH_ASSOC);
+
+	$message = '';
+
+if(mysqli_num_rows($result) == 1)
+{
+		$message = 'working';
+} else {
+		$message = 'Sorry, those credentials do not match';
+	}
+endif;
+?>
+
+<html>
+<head>
+<title>Listing 15.7 User Login Form</title>
+</head>
+<body>
+<H1>Login form</H1>
+<?php if(!empty($message)): ?>
+		<p><?= $message ?></p>
+	<?php endif; ?>
+<Form  ACTION="register.php" method="POST">
+<p><strong>Username:</strong><BR>
+<INPUT TYPE= "text" NAME="username"></p>
+<p><strong>Password:</strong><BR>
+<INPUT TYPE="password" NAME="password"></p>
+<p><input type="SUBMIT" NAME="submit" VALUE="Login"></p>
+</Form>
+</body>
+</html>
