@@ -6,35 +6,35 @@ if( isset($_SESSION['user_id']) )
 {
 	header("Location: /");
 }
-$server = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'testDB';
-
-$conn = mysqli_connect($server, $username, $password);
-mysqli_select_db($conn,$database) or die( "Unable to select database");	//select the created database
+require 'database.php';
 
 $message = '';
 
-if(!empty($_POST['f_name']) && !empty($_POST['l_name']) &&!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password'])):
+if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'])):
 	
 	// Enter the new user in the database
-	$sql = "INSERT INTO reg_users (f_name, l_name, email, username, password) VALUES (:f_name, :l_name :email, :username, :password)";
+	$sql = "INSERT INTO reg_users (f_name, l_name, email, username, password) VALUES (:name, :name1, :email, :user, :password)";
 	$stmt = $conn->prepare($sql);
 
-	$stmt->bindParam(':f_name', $_POST['f_name']);
-	$stmt->bindParam(':l_name', $_POST['l_name']);
+	$stmt->bindParam(':name', $_POST['name']);
+	$stmt->bindParam(':name1', $_POST['name1']);
 	$stmt->bindParam(':email', $_POST['email']);
-	$stmt->bindParam(':username', $_POST['username']);
-	$stmt->bindParam(':password', $_POST['password']);
+	$stmt->bindParam(':user', $_POST['user']);
+	$stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_BCRYPT));
 
+		
 	if( $stmt->execute() ):
-		$message = 'Successfully created new user';
-	else:
+		header("Location: member.php");
+	else:	
 		$message = 'Sorry there must have been an issue creating your account';
+		header("Location: error.php");
 	endif;
+	
+	
+	
 
 endif;
+
 
 ?>
 
@@ -61,14 +61,14 @@ endif;
 
 	<h1>Register</h1>
 	
-
 	<form action="register.php" method="POST">
 	
-		<input type="text" placeholder="first name" name="f_name">
-		<input type="text" placeholder="lastname" name="l_name">
-		<input type="text" placeholder="email" name="email">
-		<input type="text" placeholder="username" name="username">
-		<input type="password" placeholder="password" name="password">		
+		<input type="text" placeholder="First name" name="name">
+		<input type="text" placeholder="lastname" name="name1">
+		<input type="text" placeholder="e-mail" name="email">
+		<input type="text" placeholder="username" name="user">
+		<input type="password" placeholder="password" name="password">
+		<input type="password" placeholder="Confirm password" name="confirm_password">
 		<input type="submit" value="send">
 
 	</form>

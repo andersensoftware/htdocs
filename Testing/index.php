@@ -197,7 +197,7 @@ else {
 			 <div id = "sses2">
 				<ul>
 					<li><a href="login.php">Log ind</a></li>
-					<li><a href="adminlogin.php">Admin login</a></li>
+					<li><a href="adlogin.php">Admin login</a></li>
 					<li><a href="validate.php">Register</a></li>
 					<li><a href="contact.php">Contact form</a></li>
 				</ul>
@@ -211,8 +211,8 @@ else {
 		<br />Welcome back <?= $user['name']; ?> 
 		<br /><br />You are already loged in!
 		<br /><br />
-		<a href="php/front.php">To frontpage?</a>
-		<a href="php/logout.php">Logout?</a>
+		<a href="member.php">To frontpage?</a>
+		<a href="logout.php">Logout?</a>
 
 	<?php else: ?>
 
