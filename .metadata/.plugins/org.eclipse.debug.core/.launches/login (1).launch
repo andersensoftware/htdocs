@@ -4,7 +4,7 @@
 <stringAttribute key="base_url" value="http://localhost/Testing/validate.php"/>
 <stringAttribute key="debugOutputEncoding" value="UTF-8"/>
 <stringAttribute key="debugTransferEncoding" value="UTF-8"/>
-<stringAttribute key="file_name" value="/Testing/validate.php"/>
+<stringAttribute key="file_name" value="/To_Do_Website/validate.php"/>
 <booleanAttribute key="firstLineBreakpoint" value="true"/>
 <stringAttribute key="name" value="Default PHP Web Server"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
@@ -14,7 +14,7 @@
 <listEntry value="1"/>
 </listAttribute>
 <booleanAttribute key="org.eclipse.php.debug.core.OpenInBrowser" value="true"/>
-<stringAttribute key="org.eclipse.php.debug.core.PHP_Project" value="/Testing"/>
+<stringAttribute key="org.eclipse.php.debug.core.PHP_Project" value="/To_Do_Website"/>
 <booleanAttribute key="org.eclipse.php.debug.core.RunWithDebugInfo" value="true"/>
 <stringAttribute key="org.eclipse.php.debug.coreconfiguration_delegate_class" value="org.eclipse.php.internal.debug.core.debugger.NoneDebuggerConfiguration$WebLaunchDelegate"/>
 <stringAttribute key="org.eclipse.php.debug.corephp_debugger_id" value="org.eclipse.php.debug.core.noneDebugger"/>

@@ -1,12 +1,18 @@
 <?php
+if (! isset($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off' ) {
+    $redirect_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    header("Location: $redirect_url");
+    exit();
+}
+
 
 session_start();
 
-require 'php/database.php';
+require 'database.php';
 
 if( isset($_SESSION['user_id']) ){
 
-	$records = $conn->prepare('SELECT id,name,email,password FROM users WHERE id = :id');
+	$records = $conn->prepare('SELECT id,name,email,password FROM reg_users WHERE id = :id');
 	$records->bindParam(':id', $_SESSION['user_id']);
 	$records->execute();
 	$results = $records->fetch(PDO::FETCH_ASSOC);
@@ -176,7 +182,7 @@ else {
 	
 	    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/css.css" rel="stylesheet">
+	
 	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -197,8 +203,8 @@ else {
 			 <div id = "sses2">
 				<ul>
 					<li><a href="login.php">Log ind</a></li>
-					<li><a href="adminlogin.php">Admin login</a></li>
-					<li><a href="register.php">Register</a></li>
+					<li><a href="adlogin.php">Admin login</a></li>
+					<li><a href="validate.php">Register</a></li>
 					<li><a href="contact.php">Contact form</a></li>
 				</ul>
               
@@ -211,8 +217,8 @@ else {
 		<br />Welcome back <?= $user['name']; ?> 
 		<br /><br />You are already loged in!
 		<br /><br />
-		<a href="php/front.php">To frontpage?</a>
-		<a href="php/logout.php">Logout?</a>
+		<a href="member.php">To frontpage?</a>
+		<a href="logout.php">Logout?</a>
 
 	<?php else: ?>
 
