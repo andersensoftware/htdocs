@@ -9,7 +9,7 @@ session_start();
 
 if( isset($_SESSION['user_id']) )
 {
-	header("Location: /");
+	header("Location: /To_DO");
 }
 require 'database.php';
 

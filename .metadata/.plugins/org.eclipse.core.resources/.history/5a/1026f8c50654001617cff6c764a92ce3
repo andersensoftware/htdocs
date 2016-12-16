@@ -5,7 +5,7 @@ if (! isset($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off' ) {
 	exit();
 }
 $server = 'localhost';
-$username = 'root';
+$username = 'admin';
 $password = '';
 $database = 'to_do_website';
 

@@ -8,7 +8,7 @@ if (! isset($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off' ) {
 session_start();
 
 if( isset($_SESSION['user_id']) ){
-	header("Location: /");
+	header("Location: /To_Do");
 }
 
 require 'database.php';
